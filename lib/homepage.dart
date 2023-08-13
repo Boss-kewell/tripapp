@@ -7,10 +7,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late PageController _pageController;
-  int? page = 1;
+  int totalPage = 4;
 
   void _onScroll() {}
-
 
   @override
   void initState() {
@@ -25,28 +24,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        onPageChanged: onPageChanged,
         controller: _pageController,
         children: <Widget>[
           makePage(
+            page: 1,
             image: 'assets/images/one.jpg',
             title: 'Buick Skylark GS 455 ',
             description:
                 'Buick Skylark GS 455 Stage 1 – US vintage oldtimer muscle classic car',
           ),
           makePage(
+            page: 2,
             image: 'assets/images/two.jpg',
             title: 'Nature Reserve – NEOM, Saudi Arabia',
             description:
                 'Canyon carving an immense gulf in the highlands, Nature Reserve – NEOM, Saudi Arabia | The NEOM Nature Reserve region is being designed to deliver protection and restoration of biodiversity across 95% of NEOM.',
           ),
           makePage(
+            page: 3,
             image: 'assets/images/three.jpg',
             title: 'Shiʻb Mūsá – NEOM, Saudi Arabia',
             description:
                 'A beautiful and ancient spring fed canyon which weaves its way through 400-meter-tall towers of granite, sandstone and basalt, before plunging into the Gulf of Aqaba | Shiʻb Mūsá – NEOM, Saudi Arabia.',
           ),
           makePage(
+              page: 4,
               image: 'assets/images/four.jpg',
               title: "Lac de l'Orceyrette, Villar-Saint-Pancrace, France",
               description:
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget makePage({image, title, description}) {
+  Widget makePage({image, title, description, page}) {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover)),
@@ -90,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '/4',
+                      '/' + totalPage.toString(),
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     )
                   ],
@@ -104,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                         title,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 40,
+                            fontSize: 50,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -178,7 +180,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       SizedBox(
                         height: 20,
-                      )
+                      ),
+                      Text(
+                        'READ MORE',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 )
@@ -186,10 +195,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-  void onPageChanged(int page) {
-    setState(() {
-      this.page = page+1;
-    });
   }
 }
